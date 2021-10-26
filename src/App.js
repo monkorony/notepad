@@ -1,6 +1,5 @@
 import './App.css';
 import { useState } from 'react';
-import NotepadForm from './components/NotepadForm';
 import Notepad from './components/Notepad';
 
 function App() {
@@ -25,20 +24,29 @@ function App() {
   ]
   const [notePads, setNotePads] = useState(testData);
 
+  //delete notepad
+  const deleteNotePad = (id) => {
+    //console.log(id);
+    //map through notePads and delete id that matches
+    const removeNotePads = notePads.filter(notePads => notePads.id !== id);
+    setNotePads(removeNotePads);
+  }
+
   return (
     <div className='notepad-wrap'>
       <h1>NotePad Application</h1>
       <section className='notepad-container'>
         <div className='notepad-title-form-wrap'>
           <h6>Notepad Title</h6>
-          
           {
             notePads.map((notePad) => (
               <Notepad 
+                key={notePad.id}
                 notePadId={notePad.id}
                 notePadTitle={notePad.noteTitle}
                 notes={notePad.notes}
                 setNotePads={setNotePads}
+                deleteNotePad={deleteNotePad}
               />
             ))
           }

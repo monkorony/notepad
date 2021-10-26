@@ -8,15 +8,20 @@ const Notepad = ({
   notePadTitle,
   notes,
   setNotePads,
+  deleteNotePad
 }) => {
   return (
     <div>
-      <NotepadForm />
+      <NotepadForm 
+        deleteNotePad={deleteNotePad}
+        notePadId={notePadId}
+      />
       <h3>My Notes</h3>
       <AddNoteForm />
       <hr style={{margin: '20px'}} />
       { notes.map((note) => (
           <Note 
+          key={note.id}
           note={note}
           />
         ))

@@ -1,6 +1,14 @@
 import React from 'react'
 
-const NotepadForm = () => {
+const NotepadForm = ({
+  deleteNotePad,
+  notePadId
+}) => {
+
+  const clickDelete = (e) => {
+    e.preventDefault();
+    deleteNotePad(notePadId);
+  }
   return (
     <div className='form-wrap notepad-form'>
       <form>
@@ -13,7 +21,7 @@ const NotepadForm = () => {
         </div>
         <div className='btn-wrap'>
           <button className='save'>Save</button>
-          <button className='delete'>Delete</button>
+          <button onClick={clickDelete} className='delete'>Delete</button>
         </div>
       </form>
     </div>
