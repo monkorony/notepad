@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddNoteForm = () => {
   return (
-    <div className='form-wrap'>
+    <div className='form-wrap' style={{margin: '20px auto'}}>
       <form>
         <div className='input-wrap'>
           <input 

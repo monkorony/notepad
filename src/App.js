@@ -9,16 +9,16 @@ function App() {
       id: 1, 
       notePadTitle: 'Notepad Title 1', 
       notes: [
-        {id: 1, noteTitle: 'Notes Title', noteText: 'Notes Text'},
-        {id: 2, noteTitle: 'Notes Title', noteText: 'Notes Text'},
-        {id: 3, noteTitle: 'Notes Title', noteText: 'Notes Text'}
+        {id: 10, noteTitle: 'Notes Title 10', noteText: 'Notes Text 10'},
+        {id: 20, noteTitle: 'Notes Title 20', noteText: 'Notes Text 20'},
+        {id: 30, noteTitle: 'Notes Title 30', noteText: 'Notes Text 30'}
       ]
     },
     {
       id: 2, 
-      notePadTitle: 'Notepad Title 1', 
+      notePadTitle: 'Notepad Title 2', 
       notes: [
-        {id: 1, noteTitle: 'Notes Title', noteText: 'Notes Text'}
+        {id: 100, noteTitle: 'Notes Title 100', noteText: 'Notes Text 100'}
       ]
     }
   ]
@@ -32,12 +32,27 @@ function App() {
     setNotePads(removeNotePads);
   }
 
+  //delete note
+  const deleteNote = (notePadId, noteId) => {
+    //map through notePad then notes and delete id that matches
+    const newNotePads = notePads.map((notePad) => {
+      if (notePad.id === notePadId) {
+        //console.log(notePad, 'notePad');
+        let removeNote = notePad.notes.filter(notes => notes.id !== noteId)
+        //console.log(removeNote, 'removeNote');
+        return {...notePad, notes: removeNote}
+      }
+      return notePad;
+    });
+    //console.log(newNotePads, 'note pads');
+    setNotePads(newNotePads);
+  }
+
   return (
     <div className='notepad-wrap'>
       <h1>NotePad Application</h1>
       <section className='notepad-container'>
         <div className='notepad-title-form-wrap'>
-          <h6>Notepad Title</h6>
           {
             notePads.map((notePad) => (
               <Notepad 
@@ -47,6 +62,7 @@ function App() {
                 notes={notePad.notes}
                 setNotePads={setNotePads}
                 deleteNotePad={deleteNotePad}
+                deleteNote={deleteNote}
               />
             ))
           }
