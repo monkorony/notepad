@@ -9,7 +9,8 @@ const Notepad = ({
   notes,
   setNotePads,
   deleteNotePad,
-  deleteNote
+  deleteNote,
+  addNote
 }) => {
   return (
     <div>
@@ -19,7 +20,11 @@ const Notepad = ({
         notePadId={notePadId}
       />
       <h3>My Notes</h3>
-      <AddNoteForm />
+      <AddNoteForm 
+        notePadId={notePadId}
+        notes={notes}
+        addNote={addNote}
+      />
       
       { notes.map((note) => (
           <Note 

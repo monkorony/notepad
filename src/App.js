@@ -1,4 +1,5 @@
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import Notepad from './components/Notepad';
 
@@ -6,19 +7,19 @@ function App() {
 
   const testData = [
     {
-      id: 1, 
+      id: uuidv4(), 
       notePadTitle: 'Notepad Title 1', 
       notes: [
-        {id: 10, noteTitle: 'Notes Title 10', noteText: 'Notes Text 10'},
-        {id: 20, noteTitle: 'Notes Title 20', noteText: 'Notes Text 20'},
-        {id: 30, noteTitle: 'Notes Title 30', noteText: 'Notes Text 30'}
+        {id: uuidv4(), noteTitle: 'Notes Title 10', noteText: 'Notes Text 10'},
+        {id: uuidv4(), noteTitle: 'Notes Title 20', noteText: 'Notes Text 20'},
+        {id: uuidv4(), noteTitle: 'Notes Title 30', noteText: 'Notes Text 30'}
       ]
     },
     {
-      id: 2, 
+      id: uuidv4(), 
       notePadTitle: 'Notepad Title 2', 
       notes: [
-        {id: 100, noteTitle: 'Notes Title 100', noteText: 'Notes Text 100'}
+        {id: uuidv4(), noteTitle: 'Notes Title 100', noteText: 'Notes Text 100'}
       ]
     }
   ]
@@ -48,6 +49,22 @@ function App() {
     setNotePads(newNotePads);
   }
 
+  //add note
+  const addNote = (notePadId, note) => {
+    //map through notePad then notes and add new note
+    const newNotes = notePads.map((notePad) => {
+      if (notePad.id === notePadId) {
+        //list of new notes for specific notepadid
+        let notes = [...notePad.notes, note];
+        //return updated notes
+        return {...notePad, notes: notes}
+      }
+      return notePad;
+    });
+    console.log(newNotes, 'newNotes');
+    setNotePads(newNotes);
+  }
+
   return (
     <div className='notepad-wrap'>
       <h1>NotePad Application</h1>
@@ -63,6 +80,7 @@ function App() {
                 setNotePads={setNotePads}
                 deleteNotePad={deleteNotePad}
                 deleteNote={deleteNote}
+                addNote={addNote}
               />
             ))
           }
