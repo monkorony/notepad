@@ -53,7 +53,7 @@ const AddNoteForm = ({
             rows="6"
           />
         </div>
-        <div>{inputErr}</div>
+        <div style={{color: 'red'}}>{inputErr}</div>
         <div className='btn-wrap'>
           <button className='add'>Add</button>
         </div>

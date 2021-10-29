@@ -68,7 +68,7 @@ const NotepadForm = ({
         </div>
       </form>
       <div className='btn-wrap'>
-        <button onClick={clickDelete} className='delete'>Notepad</button>
+        <button onClick={clickDelete} className='delete'>Delete Notepad</button>
       </div>
       
     </div>

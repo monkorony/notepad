@@ -28,7 +28,6 @@ const EditNoteForm = ({
       noteTitle: currentTitle,
       noteText: currentText
     }
-    //console.log(note, 'note');
     editNote(notePadId, note.id, data);
     setCurrentTitle('');
     setIsEditing(false);

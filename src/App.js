@@ -5,22 +5,11 @@ import Notepad from './components/Notepad';
 import AddNotePadForm from './components/AddNotePadForm';
 
 function App() {
-  const testData = [
-    {
-      id: uuidv4(), 
-      notePadTitle: 'Notepad Title 1', 
-      notes: [
-        {id: uuidv4(), noteTitle: 'Notes Title 10', noteText: 'Notes Text 10'},
-        {id: uuidv4(), noteTitle: 'Notes Title 20', noteText: 'Notes Text 20'},
-        {id: uuidv4(), noteTitle: 'Notes Title 30', noteText: 'Notes Text 30'}
-      ]
-    }
-  ]
-  const [notePads, setNotePads] = useState(testData);
+
+  const [notePads, setNotePads] = useState([]);
 
   //delete notepad
   const deleteNotePad = (id) => {
-    //console.log(id);
     //map through notePads and delete id that matches
     const removeNotePads = notePads.filter(notePads => notePads.id !== id);
     setNotePads(removeNotePads);
@@ -31,14 +20,11 @@ function App() {
     //map through notePad then notes and delete id that matches
     const newNotePads = notePads.map((notePad) => {
       if (notePad.id === notePadId) {
-        //console.log(notePad, 'notePad');
         let removeNote = notePad.notes.filter(notes => notes.id !== noteId)
-        //console.log(removeNote, 'removeNote');
         return {...notePad, notes: removeNote}
       }
       return notePad;
     });
-    //console.log(newNotePads, 'note pads');
     setNotePads(newNotePads);
   }
 
@@ -54,7 +40,6 @@ function App() {
       }
       return notePad;
     });
-    //console.log(newNotes, 'newNotes');
     setNotePads(newNotes);
   }
 
@@ -83,8 +68,6 @@ function App() {
       }
       return notePad;
     });
-    
-    console.log(updateNotesTodo, 'updateNotes');
     setNotePads(updateNotesTodo);
   }
 

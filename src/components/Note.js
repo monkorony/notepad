@@ -8,11 +8,7 @@ const Note = ({
   editNote
 }) => {
   return (
-    <div>
-      {/* Title: {note.noteTitle}<br />
-      Note text: {note.noteText}
-      <br /> */}
-      
+    <div>      
       <EditNoteForm 
         note={note}
         editNote={editNote}
