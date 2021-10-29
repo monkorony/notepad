@@ -10,14 +10,18 @@ const Notepad = ({
   setNotePads,
   deleteNotePad,
   deleteNote,
-  addNote
+  addNote,
+  editeNotepadTitle,
+  editNote
 }) => {
   return (
     <div>
-      <h6>Notepad Title</h6>
+      <h6>Notepad Title: {notePadTitle}</h6>
       <NotepadForm 
         deleteNotePad={deleteNotePad}
         notePadId={notePadId}
+        editeNotepadTitle={editeNotepadTitle}
+        notePadTitle={notePadTitle}
       />
       <h3>My Notes</h3>
       <AddNoteForm 
@@ -32,6 +36,7 @@ const Notepad = ({
           note={note}
           deleteNote={deleteNote}
           notePadId={notePadId}
+          editNote={editNote}
           />
         ))
       }

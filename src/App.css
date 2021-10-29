@@ -37,13 +37,21 @@ input {
   border-radius: 3px;
   padding: 8px 5px;
   font-size: 14px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+textarea {
+  width: 100%;
+  padding: 8px 5px;
+  border: 2px solid var(--grey-light);
+  border-radius: 3px;
 }
 button {
   padding: 10px 25px;
   border-radius: 3px;
   border: none;
-  margin-right: 10px;
   color: #fff;
+  margin: 6px 10px 6px 0;
 }
 .save {
   background-color: var(--blue);
@@ -54,9 +62,22 @@ button {
 .add {
   background-color: var(--green);
 }
+.edit {
+  background-color: var(--grey);
+}
+.input-wrap {
+  width: 100%;
+}
 @media (min-width: 768px) {
   .notepad-form form {
     display: flex;
     justify-content: space-between;
+  }
+  text,
+  textarea {
+    width: 100%;
+  }
+  .input-wrap {
+    width: 50%;
   }
 }

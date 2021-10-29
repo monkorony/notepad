@@ -1,32 +1,35 @@
 import React from 'react';
 import { useState } from 'react';
 
-const NotepadForm = ({
+const EditNoteForm = ({
   deleteNotePad,
   notePadId,
   editeNotepadTitle,
-  notePadTitle
+  notePadTitle,
+  note,
+  editNote
 }) => {
 
-  const [title, setTitle] = useState('');
   const [inputErr, setInputErr] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
+  const [currentText, setCurrentText] = useState('');
   const [isEditing, setIsEditing] = useState(false);
 
   const handleNoteTitleChange = (e) => {
     setCurrentTitle(e.target.value);
   }
-
-  //click delete
-  const clickDelete = (e) => {
-    e.preventDefault();
-    deleteNotePad(notePadId);
+  const handleNoteTextChange = (e) => {
+    setCurrentText(e.target.value);
   }
-
   //click save
   const clickSave = (e) => {
     e.preventDefault();
-    editeNotepadTitle(notePadId, currentTitle);
+    const data = {
+      noteTitle: currentTitle,
+      noteText: currentText
+    }
+    //console.log(note, 'note');
+    editNote(notePadId, note.id, data);
     setCurrentTitle('');
     setIsEditing(false);
   }
@@ -34,20 +37,31 @@ const NotepadForm = ({
   //click edit 
   const clickEdit = (e) => {
     e.preventDefault();
-    setCurrentTitle(notePadTitle);
+    setCurrentText(note.noteText)
+    setCurrentTitle(note.noteTitle);
     setIsEditing(true);
   }
 
   return (
     <div className='form-wrap notepad-form'>
-      <form >
-        <div className='input-wrap' style={isEditing ? {display: 'block'} : {display: 'none'}}>
+      <form>
+        <div className='input-wrap' >
           <input 
             type="text" 
             name="title" 
-            placeholder='My notepad title...' 
+            placeholder={note.noteTitle} 
             value={currentTitle}
             onChange={handleNoteTitleChange}
+            disabled={!isEditing ? 'disabled' : ''}
+          /> <br />
+          <textarea 
+            type="text" 
+            name="note" 
+            placeholder={note.noteText} 
+            value={currentText}
+            onChange={handleNoteTextChange}
+            rows="6"
+            disabled={!isEditing ? 'disabled' : ''}
           />
         </div>
         <div className='btn-wrap'>
@@ -67,12 +81,8 @@ const NotepadForm = ({
           </button>
         </div>
       </form>
-      <div className='btn-wrap'>
-        <button onClick={clickDelete} className='delete'>Notepad</button>
-      </div>
-      
     </div>
   )
 }
 
-export default NotepadForm
+export default EditNoteForm

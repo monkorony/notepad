@@ -7,7 +7,6 @@ const AddNoteForm = ({
   notes,
   addNote
 }) => {
-  const [note, setNote] = useState({});
   const [noteTitle, setNoteTitle] = useState('');
   const [noteText, setNoteText] = useState('');
   const [inputErr, setInputErr] = useState('');
@@ -51,6 +50,7 @@ const AddNoteForm = ({
             placeholder='Enter note ...' 
             value={noteText}
             onChange={handleNoteTextChange}
+            rows="6"
           />
         </div>
         <div>{inputErr}</div>

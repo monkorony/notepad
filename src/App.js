@@ -2,9 +2,9 @@ import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import Notepad from './components/Notepad';
+import AddNotePadForm from './components/AddNotePadForm';
 
 function App() {
-
   const testData = [
     {
       id: uuidv4(), 
@@ -13,13 +13,6 @@ function App() {
         {id: uuidv4(), noteTitle: 'Notes Title 10', noteText: 'Notes Text 10'},
         {id: uuidv4(), noteTitle: 'Notes Title 20', noteText: 'Notes Text 20'},
         {id: uuidv4(), noteTitle: 'Notes Title 30', noteText: 'Notes Text 30'}
-      ]
-    },
-    {
-      id: uuidv4(), 
-      notePadTitle: 'Notepad Title 2', 
-      notes: [
-        {id: uuidv4(), noteTitle: 'Notes Title 100', noteText: 'Notes Text 100'}
       ]
     }
   ]
@@ -61,13 +54,46 @@ function App() {
       }
       return notePad;
     });
-    console.log(newNotes, 'newNotes');
+    //console.log(newNotes, 'newNotes');
     setNotePads(newNotes);
+  }
+
+  //add Notepad
+  const addNotepad = (notepad) => {
+    setNotePads([...notePads, notepad]);
+  }
+
+  //edit Notepad Title
+  const editeNotepadTitle = (id, title) => {
+    const updateNotepad = notePads.map((notePad) => {
+      return notePad.id === id ? {...notePad, notePadTitle: title} : notePad
+    });
+    setNotePads(updateNotepad);
+  }
+
+  //edit Notes
+  const editNote = (notepadId, noteId, note) => {
+    const updateNotesTodo = notePads.map((notePad) => {
+      if (notePad.id === notepadId) {
+        let updateNotes = notePad.notes.map((noteItem) => {
+          return noteItem.id === noteId ? {...noteItem, noteText: note.noteText, noteTitle: note.noteTitle } : noteItem
+        });
+        return {...notePad, notes: updateNotes}
+
+      }
+      return notePad;
+    });
+    
+    console.log(updateNotesTodo, 'updateNotes');
+    setNotePads(updateNotesTodo);
   }
 
   return (
     <div className='notepad-wrap'>
       <h1>NotePad Application</h1>
+      <AddNotePadForm 
+        addNotepad={addNotepad}
+      />
       <section className='notepad-container'>
         <div className='notepad-title-form-wrap'>
           {
@@ -75,12 +101,14 @@ function App() {
               <Notepad 
                 key={notePad.id}
                 notePadId={notePad.id}
-                notePadTitle={notePad.noteTitle}
+                notePadTitle={notePad.notePadTitle}
                 notes={notePad.notes}
                 setNotePads={setNotePads}
                 deleteNotePad={deleteNotePad}
                 deleteNote={deleteNote}
                 addNote={addNote}
+                editeNotepadTitle={editeNotepadTitle}
+                editNote={editNote}
               />
             ))
           }
